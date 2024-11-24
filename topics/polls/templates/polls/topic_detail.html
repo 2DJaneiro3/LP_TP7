@@ -22,7 +22,7 @@
         <p>{{ topic.description }}</p>
         <p><small>by {{ topic.author.username }} on {{ topic.created_at }}</small></p>
 
-        <!-- Verifica se o usuário logado é o autor do tópico para mostrar os botões de edição e exclusão -->
+        <!-- Verifica se o Utilizador logado é o autor do tópico para mostrar os botões de edição e exclusão -->
         {% if request.user == topic.author %}
             <a href="{% url 'edit_topic' topic.id %}" class="btn btn-warning mt-2">Edit Topic</a>
             <a href="{% url 'delete_topic' topic.id %}" class="btn btn-danger mt-2">Delete Topic</a>
@@ -35,7 +35,7 @@
                     <p>{{ comment.text }}</p>
                     <small>by {{ comment.author.username }} on {{ comment.created_at }}</small>
 
-                    <!-- Verifica se o usuário logado é o autor do comentário para mostrar os botões de edição e exclusão -->
+                    <!-- Verifica se o Utilizador logado é o autor do comentário para mostrar os botões de edição e exclusão -->
                     {% if request.user == comment.author %}
                         <a href="{% url 'edit_comment' comment.id %}" class="btn btn-sm btn-warning">Edit Comment</a>
                         <a href="{% url 'delete_comment' comment.id %}" class="btn btn-sm btn-danger">Delete Comment</a>

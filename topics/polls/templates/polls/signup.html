@@ -8,18 +8,18 @@
 </head>
 <body>
     <div class="container mt-5">
-        <!-- Formulário de Registro com Crispy Forms -->
+        <!-- Formulário de Registo com Crispy Forms -->
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h2 class="text-center mb-4">Registro de Usuário</h2>
+                <h2 class="text-center mb-4">Registo de Utilizador</h2>
                 <form method="post" class="card p-4">
                     {% csrf_token %}
                     
                     <!-- Crispy Forms renderiza o formulário completo com Bootstrap -->
                     {{ form|crispy }}
 
-                    <!-- Botão de Registro -->
-                    <button type="submit" class="btn btn-success w-100">Registrar</button>
+                    <!-- Botão de Registo -->
+                    <button type="submit" class="btn btn-success w-100">Registar</button>
                 </form>
                 
                 <!-- Link para Login -->

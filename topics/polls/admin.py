@@ -7,4 +7,3 @@ class TopicsAdmin(admin.ModelAdmin):
     
 admin.site.register(Topic)
 
-# Register your models here.

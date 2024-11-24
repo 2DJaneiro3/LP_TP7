@@ -6,7 +6,7 @@ from .models import Topic, Comment
 class ForumTestCase(TestCase):
     
     def setUp(self):
-        # Criação de um usuário para autenticação nos testes
+        # Criação de um utilizador para autenticação nos testes
         self.user = User.objects.create_user(username='testuser', password='testpass')
         self.client.login(username='testuser', password='testpass')
         
@@ -23,8 +23,8 @@ class ForumTestCase(TestCase):
             'title': 'New Topic',
             'description': 'New Description'
         })
-        self.assertEqual(response.status_code, 302)  # Verifica se foi redirecionado
-        self.assertEqual(Topic.objects.count(), 2)   # Agora deve haver 2 tópicos
+        self.assertEqual(response.status_code, 302)  
+        self.assertEqual(Topic.objects.count(), 2) 
     
     def test_edit_topic(self):
         # Testando a edição de um tópico existente
@@ -41,19 +41,19 @@ class ForumTestCase(TestCase):
     def test_delete_topic(self):
         # Testando a exclusão de um tópico
         response = self.client.post(reverse('delete_topic', args=[self.topic.id]))
-        self.assertEqual(response.status_code, 302)  # Verifica se foi redirecionado
-        self.assertEqual(Topic.objects.count(), 0)   # Agora deve haver 0 tópicos
+        self.assertEqual(response.status_code, 302)  
+        self.assertEqual(Topic.objects.count(), 0)   # Verifica se tem 0 tópicos
     
     def test_add_comment(self):
         # Testando a adição de um comentário a um tópico
         response = self.client.post(reverse('add_comment', args=[self.topic.id]), {
             'text': 'This is a test comment'
         })
-        self.assertEqual(response.status_code, 302)  # Verifica se foi redirecionado
-        self.assertEqual(Comment.objects.count(), 1)  # Agora deve haver 1 comentário
+        self.assertEqual(response.status_code, 302) 
+        self.assertEqual(Comment.objects.count(), 1)  # Verifica se tem 1 comentário
     
     def test_edit_comment(self):
-        # Criando um comentário para testar a edição
+        # Criação de um comentário
         comment = Comment.objects.create(
             text='Original Comment',
             topic=self.topic,
@@ -63,14 +63,14 @@ class ForumTestCase(TestCase):
         response = self.client.post(reverse('edit_comment', args=[comment.id]), {
             'text': 'Edited Comment'
         })
-        self.assertEqual(response.status_code, 302)  # Verifica se foi redirecionado
+        self.assertEqual(response.status_code, 302)  
         
         # Atualiza o comentário e verifica se o texto foi alterado
         comment.refresh_from_db()
         self.assertEqual(comment.text, 'Edited Comment')
     
     def test_delete_comment(self):
-        # Criando um comentário para testar a exclusão
+        # Criação de um comentário 
         comment = Comment.objects.create(
             text='Comment to Delete',
             topic=self.topic,
@@ -78,5 +78,5 @@ class ForumTestCase(TestCase):
         )
         
         response = self.client.post(reverse('delete_comment', args=[comment.id]))
-        self.assertEqual(response.status_code, 302)  # Verifica se foi redirecionado
-        self.assertEqual(Comment.objects.count(), 0)  # Deve haver 0 comentários
+        self.assertEqual(response.status_code, 302)  
+        self.assertEqual(Comment.objects.count(), 0)  # Verifica se tem 0 comentários
